@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37301.10 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KADJFAPI.Android", "KADJFAPI.Android\KADJFAPI.Android.csproj", "{A0D04AE6-3002-4F02-8C29-E7F4396698D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KADJFAPI", "KADJFAPI\KADJFAPI.csproj", "{7CA325D8-C50F-48C3-9F0F-E9AFCCDD77EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0D04AE6-3002-4F02-8C29-E7F4396698D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0D04AE6-3002-4F02-8C29-E7F4396698D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0D04AE6-3002-4F02-8C29-E7F4396698D7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A0D04AE6-3002-4F02-8C29-E7F4396698D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0D04AE6-3002-4F02-8C29-E7F4396698D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0D04AE6-3002-4F02-8C29-E7F4396698D7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{7CA325D8-C50F-48C3-9F0F-E9AFCCDD77EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CA325D8-C50F-48C3-9F0F-E9AFCCDD77EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CA325D8-C50F-48C3-9F0F-E9AFCCDD77EE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7CA325D8-C50F-48C3-9F0F-E9AFCCDD77EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CA325D8-C50F-48C3-9F0F-E9AFCCDD77EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CA325D8-C50F-48C3-9F0F-E9AFCCDD77EE}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A588E0A9-7144-44C3-A546-495060105E95}
+	EndGlobalSection
+EndGlobal
