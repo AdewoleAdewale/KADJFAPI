@@ -30,36 +30,20 @@ namespace KADJFAPI.Views
         // FIXED VerifyResponse model - amount changed to decimal, added missing fields
         internal class VerifyResponse
         {
-            public int id { get; set; }
-            public string caseFileNumber { get; set; }
-            public string taxId { get; set; }
-            public string fullName { get; set; }
-            public string email { get; set; }
-            public string phoneNumber { get; set; }
-            public string mda { get; set; }
-            public string court { get; set; }          // ← was in model but unused
-            public string paymentItem { get; set; }
-            public string payment_item { get; set; }   // ← API returns BOTH
-            public string paymentGateway { get; set; }
-            public decimal amount { get; set; }        // ← FIX: was string, API sends number
-            public string paymentReference { get; set; }
-            public string status { get; set; }
-            public string dateRecorded { get; set; }
-            public string lga { get; set; }
+            public string status_code { get; set; }
+            public string message { get; set; }
+            public string agent_name { get; set; }
             public string payer_name { get; set; }
-            public string payer_email { get; set; }
-            public string date_of_payment { get; set; }
+            public string payment_item { get; set; }
+            public decimal amount { get; set; }
+            public string lga { get; set; }
             public string superagent { get; set; }
-            public int filled { get; set; }
-            public int formId { get; set; }
-            public string sessionId { get; set; }
+            public string date_of_payment { get; set; }
+            public string date_recorded { get; set; }
+            public string court { get; set; }
 
-            // FIXED: was checking status twice, now checks actual required fields
-            public bool IsValid()
-            {
-                return !string.IsNullOrWhiteSpace(status) &&
-                       !string.IsNullOrWhiteSpace(payer_name);
-            }
+            public bool IsValid() =>
+                status_code == "00" || !string.IsNullOrWhiteSpace(payer_name);
         }
         // Static properties for data persistence
         public static string TaxId { get; set; }
@@ -745,15 +729,15 @@ namespace KADJFAPI.Views
             {
                 if (result != null)
                 {
-                    Status = result.status?.Trim() ?? "Verification completed";
+                    Status = (result.status_code == "00") ? "Successful" : (result.message ?? "Verification completed");
                     SuperAgent = result.superagent?.Trim() ?? "";
-                    DateRecorded = result.dateRecorded?.Trim() ?? "";
+                    DateRecorded = result.date_recorded?.Trim() ?? "";
                     LGA = result.lga?.Trim() ?? "";
                     PayerName = result.payer_name?.Trim() ?? "";
-                    FullName = result.fullName?.Trim() ?? "";
-                    Court = result.mda?.Trim() ?? "";   // mda = full court name
-                    PaymentItem = (result.paymentItem ?? result.payment_item)?.Trim() ?? "";
-                    Amount = result.amount.ToString("F2"); // ← FIX: decimal → string for display
+                    FullName = result.agent_name?.Trim() ?? "";   // "agent" column in the UI
+                    Court = result.court?.Trim() ?? "";
+                    PaymentItem = result.payment_item?.Trim() ?? "";
+                    Amount = result.amount.ToString("F2");
                     DateOfPayment = result.date_of_payment?.Trim() ?? "";
 
                     AddToRecentSearches(reference);

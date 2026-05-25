@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:renderers="clr-namespace:KADJFAPI.Renderers"
-             x:Class="KADJFAPI.Views.LoginPage"    
+             x:Class="KADJFAPI.Views.LoginPage"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="#030F0A">
 
@@ -17,14 +17,61 @@
         <Grid RowDefinitions="Auto,*,Auto"
               MinimumHeightRequest="700">
 
+            <!-- Layered dark-emerald background wash -->
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#08170E" Offset="0.0" />
+                    <GradientStop Color="#03100A" Offset="0.55" />
+                    <GradientStop Color="#020806" Offset="1.0" />
+                </LinearGradientBrush>
+            </Grid.Background>
 
+            <!-- ── DECORATIVE ORBS (rotated in code-behind) ───────── -->
             <yummy:PancakeView Grid.RowSpan="3"
                                CornerRadius="200"
-                               WidthRequest="380"
-                               HeightRequest="380"
+                               WidthRequest="400"
+                               HeightRequest="400"
                                HorizontalOptions="End"
                                VerticalOptions="Start"
+                               Margin="0,-120,-110,0"
+                               Opacity="0.85"
                                x:Name="OrbTopRight">
+                <yummy:PancakeView.BackgroundGradientStops>
+                    <yummy:GradientStopCollection>
+                        <yummy:GradientStop Color="#1F7D47" Offset="0.0"/>
+                        <yummy:GradientStop Color="#00000000" Offset="1.0"/>
+                    </yummy:GradientStopCollection>
+                </yummy:PancakeView.BackgroundGradientStops>
+            </yummy:PancakeView>
+
+            <!-- Bottom-left emerald orb -->
+            <yummy:PancakeView Grid.RowSpan="3"
+                               CornerRadius="190"
+                               WidthRequest="340"
+                               HeightRequest="340"
+                               HorizontalOptions="Start"
+                               VerticalOptions="End"
+                               Margin="-120,0,0,-110"
+                               Opacity="0.8"
+                               x:Name="OrbBottomLeft">
+                <yummy:PancakeView.BackgroundGradientStops>
+                    <yummy:GradientStopCollection>
+                        <yummy:GradientStop Color="#0F5A31" Offset="0.0"/>
+                        <yummy:GradientStop Color="#00000000" Offset="1.0"/>
+                    </yummy:GradientStopCollection>
+                </yummy:PancakeView.BackgroundGradientStops>
+            </yummy:PancakeView>
+
+            <!-- Soft central glow behind the crest (static, decorative) -->
+            <yummy:PancakeView Grid.Row="0"
+                               CornerRadius="160"
+                               WidthRequest="300"
+                               HeightRequest="300"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Start"
+                               Margin="0,-40,0,0"
+                               Opacity="0.55"
+                               InputTransparent="True">
                 <yummy:PancakeView.BackgroundGradientStops>
                     <yummy:GradientStopCollection>
                         <yummy:GradientStop Color="#1A6B3C" Offset="0.0"/>
@@ -33,106 +80,118 @@
                 </yummy:PancakeView.BackgroundGradientStops>
             </yummy:PancakeView>
 
-            <!-- Bottom-left emerald orb -->
-            <yummy:PancakeView Grid.RowSpan="3"
-                               CornerRadius="180"
-                               WidthRequest="320"
-                               HeightRequest="320"
-                               HorizontalOptions="Start"
-                               VerticalOptions="End"
-                               Margin="-100,0,0,-100"
-                               x:Name="OrbBottomLeft">
-                <yummy:PancakeView.BackgroundGradientStops>
-                    <yummy:GradientStopCollection>
-                        <yummy:GradientStop Color="#0D4D2A" Offset="0.0"/>
-                        <yummy:GradientStop Color="#00000000" Offset="1.0"/>
-                    </yummy:GradientStopCollection>
-                </yummy:PancakeView.BackgroundGradientStops>
-            </yummy:PancakeView>
-
             <!-- ── HEADER ──────────────────────────────────────── -->
             <StackLayout Grid.Row="0"
                          Spacing="0"
-                         Padding="30,55,30,0"
+                         Padding="30,58,30,0"
                          x:Name="HeaderSection"
                          Opacity="0">
 
-                <!-- Seal / crest container -->
+                <!-- Crest / seal — nested gold-ringed emblem -->
                 <yummy:PancakeView HorizontalOptions="Center"
-                                   WidthRequest="90"
-                                   HeightRequest="90"
-                                   CornerRadius="15"
-                                   Margin="0,0,0,18"
+                                   WidthRequest="96"
+                                   HeightRequest="96"
+                                   CornerRadius="24"
+                                   Padding="0"
+                                   Margin="0,0,0,20"
+                                   HasShadow="True"
+                                   Elevation="10"
+                                   BorderThickness="1.5"
+                                   BorderGradientStartColor="#E6CC7A"
+                                   BorderGradientEndColor="#9A7D33"
+                                   BorderGradientAngle="135"
                                    x:Name="SealFrame">
-                    <yummy:PancakeView.BorderColor>
-                        <Color>#C8A84B</Color>
-                    </yummy:PancakeView.BorderColor>
                     <yummy:PancakeView.BackgroundGradientStops>
                         <yummy:GradientStopCollection>
                             <yummy:GradientStop Color="#0D4D2A" Offset="0.0"/>
                             <yummy:GradientStop Color="#030F0A" Offset="1.0"/>
                         </yummy:GradientStopCollection>
                     </yummy:PancakeView.BackgroundGradientStops>
-                    <Image Source="Logo"
-                           Aspect="AspectFit"
-                           Margin="10"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center" />
+
+                    <!-- Inner gold ring holding the logo -->
+                    <yummy:PancakeView WidthRequest="74"
+                                       HeightRequest="74"
+                                       CornerRadius="37"
+                                       BorderThickness="1"
+                                       Padding="0"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center">
+                        <yummy:PancakeView.BorderColor>
+                            <Color>#C8A84B</Color>
+                        </yummy:PancakeView.BorderColor>
+                        <yummy:PancakeView.BackgroundGradientStops>
+                            <yummy:GradientStopCollection>
+                                <yummy:GradientStop Color="#0A3D22" Offset="0.0"/>
+                                <yummy:GradientStop Color="#061A10" Offset="1.0"/>
+                            </yummy:GradientStopCollection>
+                        </yummy:PancakeView.BackgroundGradientStops>
+
+                        <Image Source="Logo"
+                               Aspect="AspectFit"
+                               Margin="13"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" />
+                    </yummy:PancakeView>
                 </yummy:PancakeView>
 
                 <!-- Gold rule above title -->
                 <BoxView HeightRequest="1"
-                         WidthRequest="50"
+                         WidthRequest="46"
                          HorizontalOptions="Center"
-                         Margin="0,0,0,14"
+                         Margin="0,0,0,13"
                          Color="#C8A84B" />
 
                 <Label Text="KADUNA STATE JUDICIARY"
-                       FontSize="13"
+                       FontSize="14"
                        FontAttributes="Bold"
-                       CharacterSpacing="3"
-                       TextColor="#C8A84B"
+                       CharacterSpacing="3.5"
+                       TextColor="#E6CC7A"
                        HorizontalTextAlignment="Center" />
 
                 <Label Text="Secure Case Management Portal"
                        FontSize="11"
-                       CharacterSpacing="1"
+                       CharacterSpacing="1.2"
                        TextColor="#5E7A68"
                        HorizontalTextAlignment="Center"
-                       Margin="0,4,0,0" />
+                       Margin="0,5,0,0" />
 
                 <BoxView HeightRequest="1"
-                         WidthRequest="50"
+                         WidthRequest="46"
                          HorizontalOptions="Center"
-                         Margin="0,14,0,0"
+                         Margin="0,13,0,0"
                          Color="#1A3D28" />
 
             </StackLayout>
 
             <!-- ── MAIN FORM CARD ──────────────────────────────── -->
             <yummy:PancakeView Grid.Row="1"
-                               Margin="18,30,18,10"
-                               Padding="28,32,28,28"
+                               Margin="18,28,18,10"
+                               Padding="26,30,26,28"
                                CornerRadius="24"
-                            
+                               HasShadow="True"
+                               Elevation="14"
+                               BorderThickness="1"
                                x:Name="FormContainer"
                                Opacity="0"
                                TranslationY="60">
 
-                <!-- Glass-dark background -->
+                <yummy:PancakeView.BorderColor>
+                    <Color>#163826</Color>
+                </yummy:PancakeView.BorderColor>
+
+                <!-- Glass-dark card fill -->
                 <yummy:PancakeView.BackgroundGradientStops>
                     <yummy:GradientStopCollection>
-                        <yummy:GradientStop Color="Transparent" Offset="0.0"/>
-                        <yummy:GradientStop Color="Transparent" Offset="1.0"/>
+                        <yummy:GradientStop Color="#0B2014" Offset="0.0"/>
+                        <yummy:GradientStop Color="#061309" Offset="1.0"/>
                     </yummy:GradientStopCollection>
                 </yummy:PancakeView.BackgroundGradientStops>
-
 
                 <StackLayout Spacing="0">
 
                     <!-- Section heading -->
                     <Label Text="Sign In"
-                           FontSize="26"
+                           FontSize="27"
                            FontAttributes="Bold"
                            TextColor="White"
                            Margin="0,0,0,4" />
@@ -154,8 +213,8 @@
                                TextColor="#4D7A61" />
 
                         <yummy:PancakeView Padding="0"
-                                           HeightRequest="52"
-                                           CornerRadius="12"
+                                           HeightRequest="54"
+                                           CornerRadius="13"
                                            BorderThickness="1.5"
                                            BackgroundColor="#0F2A1B"
                                            x:Name="EmailContainer">
@@ -163,16 +222,17 @@
                                 <Color>#1F4030</Color>
                             </yummy:PancakeView.BorderColor>
 
-                            <Grid ColumnDefinitions="44,*">
+                            <Grid ColumnDefinitions="46,*">
                                 <!-- Icon pill -->
                                 <yummy:PancakeView Grid.Column="0"
                                                    CornerRadius="10"
                                                    BackgroundColor="#152E1F"
-                                                   Margin="6"
+                                                   Margin="7"
                                                    HorizontalOptions="Fill">
-                                    <Label Text="+"
-                                           FontSize="15"
-                                           TextColor="#4D9E6A"
+                                    <Label Text="@"
+                                           FontSize="17"
+                                           FontAttributes="Bold"
+                                           TextColor="#C8A84B"
                                            HorizontalOptions="Center"
                                            VerticalOptions="Center" />
                                 </yummy:PancakeView>
@@ -205,7 +265,7 @@
                     <!-- ── PASSWORD ────────────────────────────── -->
                     <StackLayout Spacing="8"
                                  x:Name="PasswordSection"
-                                 Margin="0,0,0,10">
+                                 Margin="0,0,0,12">
 
                         <Label Text="PASSWORD"
                                FontSize="11"
@@ -214,8 +274,8 @@
                                TextColor="#4D7A61" />
 
                         <yummy:PancakeView Padding="0"
-                                           HeightRequest="52"
-                                           CornerRadius="12"
+                                           HeightRequest="54"
+                                           CornerRadius="13"
                                            BorderThickness="1.5"
                                            BackgroundColor="#0F2A1B"
                                            x:Name="PasswordContainer">
@@ -223,12 +283,12 @@
                                 <Color>#1F4030</Color>
                             </yummy:PancakeView.BorderColor>
 
-                            <Grid ColumnDefinitions="44,*,44">
+                            <Grid ColumnDefinitions="46,*,46">
                                 <!-- Icon pill -->
                                 <yummy:PancakeView Grid.Column="0"
                                                    CornerRadius="10"
                                                    BackgroundColor="#152E1F"
-                                                   Margin="6"
+                                                   Margin="7"
                                                    HorizontalOptions="Fill">
                                     <Label Text="🔒"
                                            FontSize="14"
@@ -249,16 +309,16 @@
                                                            Focused="OnPasswordFocused"
                                                            Unfocused="OnPasswordUnfocused"
                                                            ReturnType="Done"
-                                                           ReturnCommand="{Binding SignInCommand}" />
+                                                           Completed="Button_Clicked" />
 
                                 <!-- Eye toggle button -->
                                 <ImageButton Grid.Column="2"
                                              x:Name="PasswordToggleBtn"
                                              Source="icons8eyes"
                                              BackgroundColor="Transparent"
-                                             WidthRequest="44"
-                                             HeightRequest="44"
-                                             Padding="10"
+                                             WidthRequest="46"
+                                             HeightRequest="46"
+                                             Padding="11"
                                              Aspect="AspectFit"
                                              Clicked="OnPasswordToggleClicked" />
                             </Grid>
@@ -288,33 +348,40 @@
 
                     <!-- ── SIGN IN BUTTON ──────────────────────── -->
                     <yummy:PancakeView x:Name="SignInButton"
-                                       HeightRequest="54"
-                                       CornerRadius="14"
-                                       BorderThickness="2"
-                                       BorderGradientStartColor="ForestGreen"
-                                       BorderGradientEndColor="#00000000"
+                                       HeightRequest="56"
+                                       CornerRadius="15"
+                                       BorderThickness="1.5"
+                                       BorderGradientStartColor="#E6CC7A"
+                                       BorderGradientEndColor="#1A7A45"
+                                       BorderGradientAngle="135"
                                        HasShadow="True"
-                                       Elevation="8"
+                                       Elevation="10"
                                        BackgroundGradientAngle="135">
                         <yummy:PancakeView.BackgroundGradientStops>
                             <yummy:GradientStopCollection>
-                                <yummy:GradientStop Color="#1A7A45" Offset="0.0"/>
+                                <yummy:GradientStop Color="#1F8C4F" Offset="0.0"/>
                                 <yummy:GradientStop Color="#0D4D2A" Offset="1.0"/>
                             </yummy:GradientStopCollection>
                         </yummy:PancakeView.BackgroundGradientStops>
 
-                        <!-- Gold shimmer border -->
-
-
                         <Grid>
-                            <Label x:Name="SignInLabel"
-                                   Text="SIGN IN"
-                                   FontSize="15"
-                                   FontAttributes="Bold"
-                                   CharacterSpacing="2.5"
-                                   TextColor="White"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
+                            <StackLayout Orientation="Horizontal"
+                                         HorizontalOptions="Center"
+                                         VerticalOptions="Center"
+                                         Spacing="10">
+                                <Label x:Name="SignInLabel"
+                                       Text="SIGN IN"
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       CharacterSpacing="2.5"
+                                       TextColor="White"
+                                       VerticalOptions="Center" />
+                                <Label Text="→"
+                                       FontSize="17"
+                                       FontAttributes="Bold"
+                                       TextColor="#E6CC7A"
+                                       VerticalOptions="Center" />
+                            </StackLayout>
 
                             <ActivityIndicator x:Name="LoadingIndicator"
                                                IsVisible="False"
@@ -334,47 +401,71 @@
 
                     <!-- Divider -->
                     <Grid ColumnDefinitions="*,Auto,*"
-                          Margin="0,22,0,18"
+                          Margin="0,24,0,18"
                           VerticalOptions="Center">
-                        <BoxView Grid.Column="0" HeightRequest="1"
-                                 BackgroundColor="#C8A84B"
-                                 VerticalOptions="Center" />
+                        <yummy:PancakeView Grid.Column="0"
+                                           HeightRequest="1"
+                                           VerticalOptions="Center"
+                                           BackgroundGradientStartColor="#00000000"
+                                           BackgroundGradientEndColor="#C8A84B"
+                                           BackgroundGradientAngle="0" />
                         <Label Grid.Column="1"
                                Text="  secure login  "
                                FontSize="10"
-                               CharacterSpacing="1"
-                               TextColor="#2E5040"
+                               CharacterSpacing="1.5"
+                               TextColor="#3D6650"
                                VerticalOptions="Center" />
-                        <BoxView Grid.Column="2" HeightRequest="1"
-                                 BackgroundColor="#C8A84B"
-                                 VerticalOptions="Center" />
+                        <yummy:PancakeView Grid.Column="2"
+                                           HeightRequest="1"
+                                           VerticalOptions="Center"
+                                           BackgroundGradientStartColor="#C8A84B"
+                                           BackgroundGradientEndColor="#00000000"
+                                           BackgroundGradientAngle="0" />
                     </Grid>
 
-                    <!-- Security badge row -->
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center"  Spacing="18">
+                    <!-- Security badge chips -->
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Center"
+                                 Spacing="12">
 
-                        <StackLayout Orientation="Horizontal" Spacing="5">
-                            <Label Text="🛡"
-                                   FontSize="12"
-                                   TextColor="#3A7A55"
-                                   VerticalOptions="Center" />
-                            <Label Text="TLS Encrypted"
-                                   FontSize="11"
-                                   TextColor="#3A5A47"
-                                   VerticalOptions="Center" />
-                        </StackLayout>
+                        <yummy:PancakeView CornerRadius="9"
+                                           BackgroundColor="#0F2418"
+                                           BorderThickness="1"
+                                           Padding="11,6">
+                            <yummy:PancakeView.BorderColor>
+                                <Color>#173826</Color>
+                            </yummy:PancakeView.BorderColor>
+                            <StackLayout Orientation="Horizontal" Spacing="5">
+                                <Label Text="🛡"
+                                       FontSize="11"
+                                       TextColor="#3A7A55"
+                                       VerticalOptions="Center" />
+                                <Label Text="TLS Encrypted"
+                                       FontSize="11"
+                                       TextColor="#5E8A6F"
+                                       VerticalOptions="Center" />
+                            </StackLayout>
+                        </yummy:PancakeView>
 
-                        <StackLayout Orientation="Horizontal" Spacing="5">
-                            <Label Text="✓"
-                                   FontSize="12"
-                                   TextColor="#3A7A55"
-                                   VerticalOptions="Center"
-                                   FontAttributes="Bold" />
-                            <Label Text="Official Portal"
-                                   FontSize="11"
-                                   TextColor="#3A5A47"
-                                   VerticalOptions="Center" />
-                        </StackLayout>
+                        <yummy:PancakeView CornerRadius="9"
+                                           BackgroundColor="#0F2418"
+                                           BorderThickness="1"
+                                           Padding="11,6">
+                            <yummy:PancakeView.BorderColor>
+                                <Color>#173826</Color>
+                            </yummy:PancakeView.BorderColor>
+                            <StackLayout Orientation="Horizontal" Spacing="5">
+                                <Label Text="✓"
+                                       FontSize="11"
+                                       TextColor="#3A7A55"
+                                       VerticalOptions="Center"
+                                       FontAttributes="Bold" />
+                                <Label Text="Official Portal"
+                                       FontSize="11"
+                                       TextColor="#5E8A6F"
+                                       VerticalOptions="Center" />
+                            </StackLayout>
+                        </yummy:PancakeView>
 
                     </StackLayout>
 
@@ -391,11 +482,11 @@
                 <!-- Support row -->
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="Center"
-                             Spacing="4"
-                             Margin="0,0,0,20">
+                             Spacing="5"
+                             Margin="0,0,0,18">
                     <Label Text="Need help?"
                            FontSize="12"
-                           TextColor="White" />
+                           TextColor="#5E7A68" />
                     <Label Text="Contact Support"
                            FontSize="12"
                            FontAttributes="Bold"
@@ -406,14 +497,12 @@
                     </Label>
                 </StackLayout>
 
-
                 <!-- Version tag -->
                 <Label Text="v3.0 · Secure Government Portal"
                        FontSize="10"
                        CharacterSpacing="0.5"
-                       TextColor="White"
-                       HorizontalOptions="Center"
-                       Margin="0,10,0,0" />
+                       TextColor="#33503F"
+                       HorizontalOptions="Center" />
 
             </StackLayout>
 

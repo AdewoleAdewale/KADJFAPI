@@ -1,6 +1,7 @@
-﻿using Acr.UserDialogs;
+﻿using KADJFAPI.Services;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
@@ -447,35 +448,54 @@ namespace KADJFAPI.Views
                     return;
                 }
 
-                string url = "https://Kadunajud.osoftpay.net/Api/KadunaJFAPI/Login/V1"
-                    + $"?Email={Uri.EscapeDataString(emailVal)}"
-                    + $"&Password={Uri.EscapeDataString(passwordVal)}";
-
                 var handler = new HttpClientHandler
                 {
-                    ServerCertificateCustomValidationCallback =
-                        (message, cert, chain, errors) => true
+                    // ✅ Proper way for older Xamarin / .NET Standard
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true,
+
+                    SslProtocols = System.Security.Authentication.SslProtocols.Tls12 |
+                     System.Security.Authentication.SslProtocols.Tls11 |
+                     System.Security.Authentication.SslProtocols.Tls,
+
+                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
                 };
 
-                using (var client = new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(30) })
+                using (var client = new HttpClient(handler))
                 {
-                    ServicePointManager.SecurityProtocol =
-                        SecurityProtocolType.Tls12 |
-                        SecurityProtocolType.Tls11 |
-                        SecurityProtocolType.Tls;
+                    client.Timeout = TimeSpan.FromSeconds(45);
+                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.UserAgent.ParseAdd("KADJFAPI-App");
 
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    using (var response = await client.GetAsync(url, cancellationToken))
+                    // === POST REQUEST WITH FORM DATA ===
+                    var content = new FormUrlEncodedContent(new[]
+                    {
+                new KeyValuePair<string, string>("Email", emailVal),
+                new KeyValuePair<string, string>("Password", passwordVal)
+            });
+
+                    using (var response = await client.GetAsync(ApiConfig.Login(emailVal, passwordVal), cancellationToken))
                     {
                         cancellationToken.ThrowIfCancellationRequested();
 
                         var jsonContent = await response.Content.ReadAsStringAsync();
 
+                        // Log response for debugging
+                        System.Diagnostics.Debug.WriteLine($"Response Status: {(int)response.StatusCode} {response.StatusCode}");
+                        System.Diagnostics.Debug.WriteLine($"Response Content: {jsonContent}");
+
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            await DisplayAlert("Access Denied",
+                                $"Server returned: {(int)response.StatusCode} - {response.StatusCode}\n\n" +
+                                "Please contact support if this continues.", "OK");
+                            return;
+                        }
+
                         if (string.IsNullOrWhiteSpace(jsonContent))
                         {
-                            await DisplayAlert("Error",
-                                "Empty response from server. Please try again.", "OK");
+                            await DisplayAlert("Error", "Empty response from server.", "OK");
                             return;
                         }
 
@@ -483,8 +503,7 @@ namespace KADJFAPI.Views
 
                         if (result == null)
                         {
-                            await DisplayAlert("Error",
-                                "Invalid response from server. Please try again.", "OK");
+                            await DisplayAlert("Error", "Invalid server response.", "OK");
                             return;
                         }
 
@@ -492,36 +511,21 @@ namespace KADJFAPI.Views
                     }
                 }
             }
-            catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
-            {
-                await DisplayAlert("Timeout",
-                    "Connection timed out. Please check your internet connection and try again.", "OK");
-            }
             catch (TaskCanceledException)
             {
-                // Cancelled by user — silent
+                await DisplayAlert("Timeout", "Connection timed out. Check your internet.", "OK");
             }
             catch (HttpRequestException ex)
             {
-                await DisplayAlert("Network Error",
-                    "Unable to connect to the server. " +
-                    "Please check your internet connection and try again.", "OK");
-                System.Diagnostics.Debug.WriteLine($"Network error: {ex.Message}");
-            }
-            catch (JsonException ex)
-            {
-                await DisplayAlert("Data Error",
-                    "Invalid response format from server. Please try again.", "OK");
-                System.Diagnostics.Debug.WriteLine($"JSON error: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Network Error: {ex.Message}");
+                await DisplayAlert("Connection Error", "Unable to reach server. Check internet.", "OK");
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error",
-                    "An unexpected error occurred. Please try again.", "OK");
-                System.Diagnostics.Debug.WriteLine($"Login error: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Login Error: {ex.Message}\n{ex.StackTrace}");
+                await DisplayAlert("Error", "An unexpected error occurred.", "OK");
             }
         }
-
         private async Task ProcessLoginResponse(LoginResponse result)
         {
             try
@@ -530,15 +534,11 @@ namespace KADJFAPI.Views
                 {
                     // ── Success ──────────────────────────────────────────────
                     await AnimateSuccessState();
-
                     MyfullName = result.name;
                     mymda = result.mda;
                     myemail = result.email;
-                    mycourt = result.court;
-
-                    UserDialogs.Instance.Toast(
-                        $"Welcome, {result.name} 👋",
-                        TimeSpan.FromSeconds(3));
+                    // new API returns mda but no separate court — fall back so mycourt is never null
+                    mycourt = string.IsNullOrWhiteSpace(result.court) ? result.mda : result.court;
 
                     Application.Current.MainPage =
                         new NavigationPage(new Views.Dashboard());

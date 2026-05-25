@@ -1,4 +1,5 @@
 ﻿using Acr.UserDialogs;
+using KADJFAPI.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -400,16 +401,16 @@ namespace KADJFAPI.Views
             {
                 try
                 {
-                    string email = string.Empty;
-                    try { email = LoginPage.myemail ?? string.Empty; } catch { }
+                    string mda = string.Empty;
+                    try { mda = LoginPage.mymda ?? string.Empty; } catch { }
 
-                    if (string.IsNullOrWhiteSpace(email))
+                    if (string.IsNullOrWhiteSpace(mda))
                     {
-                        System.Diagnostics.Debug.WriteLine("[History] Email is empty — cannot fetch history.");
+                        System.Diagnostics.Debug.WriteLine("[History] MDA is empty — cannot fetch history.");
                         return new List<HistoryData>();
                     }
 
-                    string url = $"https://yobejud.osoftpay.net/Api/KadunaJFAPI/InvoiceHistory?Email={Uri.EscapeDataString(email)}";
+                    string url = ApiConfig.InvoiceHistory(mda);
 
                     System.Diagnostics.Debug.WriteLine($"[History] Fetching: {url}");
 

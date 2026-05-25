@@ -406,7 +406,7 @@ namespace KADJFAPI.Views
                 {
                     var req = new HttpRequestMessage(
                         HttpMethod.Post,
-                        "https://yobejud.osoftpay.net/Api/KadunaJFAPI/Make_payment")
+                        "https://kadjud.osoftpay.net/Api/KadunaJFAPI/Make_payment")
                     {
                         Content = new System.Net.Http.StringContent(
                             jsonContent, System.Text.Encoding.UTF8, "application/json")
@@ -534,7 +534,7 @@ namespace KADJFAPI.Views
 
             return new ReceiptData
             {
-                StoreName = "YOBE STATE JUDICIARY",
+                StoreName = "KADUNA STATE JUDICIARY",
                 StorePhone = "Contact us: +234 803 052 3208, +234 907 070 1616",
                 ReceiptNumber = invoiceToken,
                 AgentName = LoginPage.MyfullName ?? "N/A",

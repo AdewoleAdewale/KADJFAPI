@@ -532,7 +532,7 @@ namespace KADJFAPI.Views
             PhoneNumber = userphonenumber.Text?.Trim(),
             MDA = LoginPage.mycourt,
             CaseFileNumber = CaseNumber.Text,
-            PaymentItem = _paymentData[PIC.SelectedIndex].serviceName,
+            PaymentItem = _paymentData[PIC.SelectedIndex].name,
             Amount = decimal.Parse(Regex.Replace(useramount.Text, @"[₦,\s]", "")).ToString()
         };
 
@@ -1054,8 +1054,12 @@ namespace KADJFAPI.Views
     // ══════════════════════════════════════════════════════════════════════════
 
     internal class MDAData { public string name { get; set; } }
-    internal class PaymentData { public string serviceName { get; set; } }
-
+    internal class PaymentData
+    {
+        public int id { get; set; }
+        public string name { get; set; }          // ← new API field
+        public string dateRecorded { get; set; }
+    }
     public class InvoiceRequest
     {
         public string TaxId { get; set; }

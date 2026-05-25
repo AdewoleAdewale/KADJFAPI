@@ -1,210 +1,177 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KADJFAPI.Views.History"   
+             x:Class="KADJFAPI.Views.History"
              xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Padding="0,20,0,0"
-             BackgroundColor="#004225"
+             BackgroundColor="#041710"
              NavigationPage.HasNavigationBar="True">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="google.png" Clicked="OnRefreshClicked" />
+        <ToolbarItem Text="Refresh" Clicked="OnRefreshClicked" />
     </ContentPage.ToolbarItems>
 
-    <Grid BackgroundColor="#F3F5F9"
+    <Grid BackgroundColor="#F4F7F5"
           RowSpacing="0"
           HorizontalOptions="FillAndExpand"
           VerticalOptions="FillAndExpand"
-          Margin="0,-70,5,0">
+          Margin="0,-70,0,0">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="180"/>
+            <RowDefinition Height="170"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- ══ Header ══ -->
-        <Grid BackgroundColor="#004225"
-              HorizontalOptions="FillAndExpand"
-              VerticalOptions="FillAndExpand">
-            <StackLayout Margin="0,-20,0,0"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Center">
+        <!-- ══ Header band ══ -->
+        <yummy:PancakeView BackgroundGradientAngle="160"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="FillAndExpand">
+            <yummy:PancakeView.BackgroundGradientStops>
+                <yummy:GradientStopCollection>
+                    <yummy:GradientStop Color="#11623A" Offset="0.0"/>
+                    <yummy:GradientStop Color="#0A3D22" Offset="0.6"/>
+                    <yummy:GradientStop Color="#041710" Offset="1.0"/>
+                </yummy:GradientStopCollection>
+            </yummy:PancakeView.BackgroundGradientStops>
+            <StackLayout Margin="0,-10,0,0" HorizontalOptions="Center" VerticalOptions="Center" Spacing="3">
                 <Label Text="KADUNA STATE JUDICIARY"
-                       TextColor="White"
-                       FontSize="10"
-                       HorizontalTextAlignment="Center"
-                       Margin="0,-10,0,0"/>
+                       TextColor="#E6CC7A" FontSize="12" FontAttributes="Bold"
+                       CharacterSpacing="2" HorizontalTextAlignment="Center"/>
+                <Label Text="Transaction Records"
+                       TextColor="#9FBFAC" FontSize="10"
+                       HorizontalTextAlignment="Center"/>
             </StackLayout>
-        </Grid>
+        </yummy:PancakeView>
 
-        <!-- ══ Date Card ══ -->
+        <!-- ══ Date / brand card ══ -->
         <yummy:PancakeView Grid.Row="1"
-                           HasShadow="True"
-                           HeightRequest="80"
+                           HasShadow="True" Elevation="8"
+                           HeightRequest="82"
                            Margin="0,-50,0,0"
                            BackgroundColor="White"
-                           CornerRadius="5"
-                           HorizontalOptions="CenterAndExpand"
+                           CornerRadius="14"
+                           BorderColor="#EAF1EC" BorderThickness="1"
+                           HorizontalOptions="Center"
                            VerticalOptions="CenterAndExpand">
             <Grid ColumnSpacing="0" HorizontalOptions="FillAndExpand">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="92"/>
+                    <ColumnDefinition Width="92"/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
 
-                <BoxView Grid.RowSpan="2" WidthRequest="80" BackgroundColor="#004225"/>
-                <BoxView Grid.Column="1" Grid.RowSpan="2" WidthRequest="80" BackgroundColor="White"/>
+                <yummy:PancakeView CornerRadius="14,0,0,14"
+                                   BackgroundGradientStartColor="#0D4D2A"
+                                   BackgroundGradientEndColor="#1A7A45"
+                                   BackgroundGradientAngle="135">
+                    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="0">
+                        <Label x:Name="fixeddate" TextColor="White" FontSize="34"
+                               HorizontalOptions="Center" FontAttributes="Bold"/>
+                        <Label x:Name="fixmonth" TextColor="#E6CC7A" FontSize="11"
+                               HorizontalOptions="Center" Margin="0,-6,0,0" FontAttributes="Bold"/>
+                    </StackLayout>
+                </yummy:PancakeView>
 
-                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                    <Label x:Name="fixeddate" TextColor="White" FontSize="36"
+                <StackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Padding="8">
+                    <Label Text="OSOFT" TextColor="#C8A84B" FontSize="22"
                            HorizontalOptions="Center" FontAttributes="Bold"/>
-                    <Label x:Name="fixmonth" TextColor="White" FontSize="12"
-                           HorizontalOptions="Center" Margin="0,-10,0,0" FontAttributes="Bold"/>
+                    <Label Text="KSJ" TextColor="#0D4D2A" FontSize="14"
+                           HorizontalOptions="Center" Margin="0,-4,0,0" FontAttributes="Bold"/>
                 </StackLayout>
-
-                <StackLayout Grid.Column="1" HorizontalOptions="Center"
-                             VerticalOptions="Center" Padding="10">
-                    <Label Text="OSOFT" TextColor="Orange" FontSize="25"
-                           HorizontalOptions="Center" FontAttributes="Bold"/>
-                    <Label Text="YSJ" TextColor="#004225" FontSize="15"
-                           HorizontalOptions="Center" Margin="0,-10,0,-20" FontAttributes="Bold"/>
-                </StackLayout>
-
-                <BoxView Grid.Row="1" Grid.ColumnSpan="2" WidthRequest="73" HeightRequest="1"
-                         BackgroundColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <yummy:PancakeView Grid.Row="1" HeightRequest="7" WidthRequest="7"
-                                   BorderThickness="2" BorderColor="White" CornerRadius="3.5"
-                                   BackgroundColor="White" HorizontalOptions="Center"
-                                   VerticalOptions="Center" Margin="7"/>
-                <yummy:PancakeView Grid.Row="1" Grid.Column="1" HeightRequest="7" WidthRequest="7"
-                                   BorderThickness="2" BorderColor="Orange" CornerRadius="3.5"
-                                   HorizontalOptions="Center" BackgroundColor="Orange"
-                                   VerticalOptions="Center" Margin="7"/>
             </Grid>
         </yummy:PancakeView>
 
-        <!-- ══ Statistics Card ══ -->
+        <!-- ══ Statistics card ══ -->
         <yummy:PancakeView Grid.Row="2"
-                           HasShadow="True"
+                           HasShadow="True" Elevation="6"
                            BackgroundColor="White"
-                           CornerRadius="10"
-                           Margin="10,10,10,5"
-                           Padding="15">
+                           CornerRadius="16"
+                           Margin="12,12,12,6"
+                           Padding="16"
+                           BorderColor="#EAF1EC" BorderThickness="1">
             <StackLayout>
-                <Label Text="Transaction Summary"
-                       FontSize="16" FontAttributes="Bold"
-                       TextColor="#004225"
-                       HorizontalOptions="Center"
-                       Margin="0,0,0,15"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="8" Margin="0,0,0,14">
+                    <yummy:PancakeView BackgroundGradientStartColor="#C8A84B"
+                                       BackgroundGradientEndColor="#1A7A45"
+                                       BackgroundGradientAngle="135"
+                                       WidthRequest="3" HeightRequest="16" CornerRadius="2"/>
+                    <Label Text="Transaction Summary" FontSize="15" FontAttributes="Bold" TextColor="#0D4D2A"/>
+                </StackLayout>
 
-                <!-- Count row -->
-                <Grid ColumnDefinitions="*,*,*,*" Margin="0,0,0,15">
+                <!-- Counts -->
+                <Grid ColumnDefinitions="*,*,*,*" Margin="0,0,0,14">
                     <StackLayout Grid.Column="0" HorizontalOptions="Center">
-                        <Label Text="{Binding Statistics.TotalTransactions}"
-                               FontSize="20" FontAttributes="Bold"
-                               TextColor="#004225" HorizontalTextAlignment="Center"/>
-                        <Label Text="Total" FontSize="10"
-                               TextColor="Gray" HorizontalTextAlignment="Center"/>
+                        <Label Text="{Binding Statistics.TotalTransactions}" FontSize="20" FontAttributes="Bold" TextColor="#0D4D2A" HorizontalTextAlignment="Center"/>
+                        <Label Text="Total" FontSize="10" TextColor="#9CB3A4" HorizontalTextAlignment="Center"/>
                     </StackLayout>
                     <StackLayout Grid.Column="1" HorizontalOptions="Center">
-                        <Label Text="{Binding Statistics.PaidTransactions}"
-                               FontSize="20" FontAttributes="Bold"
-                               TextColor="Green" HorizontalTextAlignment="Center"/>
-                        <Label Text="Successful" FontSize="10"
-                               TextColor="Gray" HorizontalTextAlignment="Center"/>
+                        <Label Text="{Binding Statistics.PaidTransactions}" FontSize="20" FontAttributes="Bold" TextColor="#1A7A45" HorizontalTextAlignment="Center"/>
+                        <Label Text="Successful" FontSize="10" TextColor="#9CB3A4" HorizontalTextAlignment="Center"/>
                     </StackLayout>
                     <StackLayout Grid.Column="2" HorizontalOptions="Center">
-                        <Label Text="{Binding Statistics.PendingTransactions}"
-                               FontSize="20" FontAttributes="Bold"
-                               TextColor="Orange" HorizontalTextAlignment="Center"/>
-                        <Label Text="Pending" FontSize="10"
-                               TextColor="Gray" HorizontalTextAlignment="Center"/>
+                        <Label Text="{Binding Statistics.PendingTransactions}" FontSize="20" FontAttributes="Bold" TextColor="#C8A84B" HorizontalTextAlignment="Center"/>
+                        <Label Text="Pending" FontSize="10" TextColor="#9CB3A4" HorizontalTextAlignment="Center"/>
                     </StackLayout>
                     <StackLayout Grid.Column="3" HorizontalOptions="Center">
-                        <Label Text="{Binding Statistics.FailedTransactions}"
-                               FontSize="20" FontAttributes="Bold"
-                               TextColor="Red" HorizontalTextAlignment="Center"/>
-                        <Label Text="Failed" FontSize="10"
-                               TextColor="Gray" HorizontalTextAlignment="Center"/>
+                        <Label Text="{Binding Statistics.FailedTransactions}" FontSize="20" FontAttributes="Bold" TextColor="#E05252" HorizontalTextAlignment="Center"/>
+                        <Label Text="Failed" FontSize="10" TextColor="#9CB3A4" HorizontalTextAlignment="Center"/>
                     </StackLayout>
                 </Grid>
 
-                <BoxView HeightRequest="1" BackgroundColor="LightGray" Margin="0,5,0,15"/>
-                <Label Text="Amount Breakdown"
-                       FontSize="14" FontAttributes="Bold"
-                       TextColor="#004225"
-                       HorizontalOptions="Center"
-                       Margin="0,0,0,10"/>
+                <BoxView HeightRequest="1" BackgroundColor="#EAF1EC" Margin="0,4,0,14"/>
+                <Label Text="Amount Breakdown" FontSize="13" FontAttributes="Bold"
+                       TextColor="#0D4D2A" HorizontalOptions="Center" Margin="0,0,0,10"/>
 
                 <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*">
-                    <!-- Total -->
                     <StackLayout Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,0,0,10">
-                        <Label Text="{Binding Statistics.FormattedTotalAmount}"
-                               FontSize="18" FontAttributes="Bold"
-                               TextColor="#004225" HorizontalTextAlignment="Center"/>
-                        <Label Text="Total Amount"
-                               FontSize="12" TextColor="Gray" HorizontalTextAlignment="Center"/>
+                        <Label Text="{Binding Statistics.FormattedTotalAmount}" FontSize="18" FontAttributes="Bold" TextColor="#0D4D2A" HorizontalTextAlignment="Center"/>
+                        <Label Text="Total Amount" FontSize="11" TextColor="#9CB3A4" HorizontalTextAlignment="Center"/>
                     </StackLayout>
-                    <!-- Successful -->
-                    <StackLayout Grid.Row="1" Grid.Column="0"
-                                 HorizontalOptions="Center" Margin="0,5,0,0">
-                        <Label Text="{Binding Statistics.FormattedSuccessfulAmount}"
-                               FontSize="14" FontAttributes="Bold"
-                               TextColor="Green" HorizontalTextAlignment="Center"/>
-                        <Label Text="Successful"
-                               FontSize="10" TextColor="Gray" HorizontalTextAlignment="Center"/>
+                    <StackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="Center" Margin="0,4,0,0">
+                        <Label Text="{Binding Statistics.FormattedSuccessfulAmount}" FontSize="14" FontAttributes="Bold" TextColor="#1A7A45" HorizontalTextAlignment="Center"/>
+                        <Label Text="Successful" FontSize="10" TextColor="#9CB3A4" HorizontalTextAlignment="Center"/>
                     </StackLayout>
-                    <!-- Pending -->
-                    <StackLayout Grid.Row="1" Grid.Column="1"
-                                 HorizontalOptions="Center" Margin="0,5,0,0">
-                        <Label Text="{Binding Statistics.FormattedPendingAmount}"
-                               FontSize="14" FontAttributes="Bold"
-                               TextColor="Orange" HorizontalTextAlignment="Center"/>
-                        <Label Text="Pending"
-                               FontSize="10" TextColor="Gray" HorizontalTextAlignment="Center"/>
+                    <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" Margin="0,4,0,0">
+                        <Label Text="{Binding Statistics.FormattedPendingAmount}" FontSize="14" FontAttributes="Bold" TextColor="#C8A84B" HorizontalTextAlignment="Center"/>
+                        <Label Text="Pending" FontSize="10" TextColor="#9CB3A4" HorizontalTextAlignment="Center"/>
                     </StackLayout>
                 </Grid>
             </StackLayout>
         </yummy:PancakeView>
 
-        <!-- ══ Search & Filter ══ -->
+        <!-- ══ Search & filter ══ -->
         <yummy:PancakeView Grid.Row="3"
-                           HasShadow="True"
+                           HasShadow="True" Elevation="4"
                            BackgroundColor="White"
-                           CornerRadius="10"
-                           Margin="10,5,10,10"
-                           Padding="10">
+                           CornerRadius="16"
+                           Margin="12,6,12,10"
+                           Padding="12"
+                           BorderColor="#EAF1EC" BorderThickness="1">
             <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="2*,*">
 
-                <yummy:PancakeView BorderThickness="1" BorderColor="LightGray"
-                                   CornerRadius="8" BackgroundColor="White">
+                <yummy:PancakeView BorderThickness="1.5" BorderColor="#DDE7E0"
+                                   CornerRadius="11" BackgroundColor="#F6FAF7">
                     <SearchBar x:Name="searchentry"
                                Text="{Binding SearchText}"
                                TextChanged="OnSearchTextChanged"
                                Placeholder="Search by name, reference…"
-                               PlaceholderColor="Gray"
-                               TextColor="#004225"
+                               PlaceholderColor="#9CB3A4"
+                               TextColor="#0D4D2A"
                                FontSize="14"
                                BackgroundColor="Transparent"/>
                 </yummy:PancakeView>
 
                 <yummy:PancakeView Grid.Column="1"
-                                   BorderThickness="1" BorderColor="LightGray"
-                                   CornerRadius="8" BackgroundColor="White"
-                                   Margin="10,0,0,0">
+                                   BorderThickness="1.5" BorderColor="#DDE7E0"
+                                   CornerRadius="11" BackgroundColor="#F6FAF7"
+                                   Margin="10,0,0,0" Padding="10,0">
                     <Picker x:Name="filterPicker"
                             SelectedItem="{Binding SelectedFilter}"
                             SelectedIndexChanged="OnFilterChanged"
-                            TextColor="#004225"
-                            FontSize="14">
+                            TextColor="#0D4D2A" FontSize="14">
                         <Picker.Items>
                             <x:String>All</x:String>
                             <x:String>Paid</x:String>
@@ -215,56 +182,39 @@
                 </yummy:PancakeView>
 
                 <StackLayout Grid.Row="1" Grid.ColumnSpan="2"
-                             Orientation="Horizontal"
-                             HorizontalOptions="Center"
-                             Margin="0,10,0,0">
-                    <Label Text="Filtered Total:"
-                           FontSize="14" FontAttributes="Bold" TextColor="#004225"/>
+                             Orientation="Horizontal" HorizontalOptions="Center" Margin="0,10,0,0">
+                    <Label Text="Filtered Total:" FontSize="13" FontAttributes="Bold" TextColor="#0D4D2A"/>
                     <Label Text="{Binding Statistics.FormattedTotalAmount}"
-                           FontSize="14" FontAttributes="Bold"
-                           TextColor="Red" Margin="5,0,0,0"/>
+                           FontSize="13" FontAttributes="Bold" TextColor="#E05252" Margin="5,0,0,0"/>
                 </StackLayout>
             </Grid>
         </yummy:PancakeView>
 
-        <!-- ══ Content Area ══ -->
-        <Grid Grid.Row="4" Margin="10,0,10,10">
+        <!-- ══ Content ══ -->
+        <Grid Grid.Row="4" Margin="12,0,12,10">
 
             <!-- Loading -->
-            <StackLayout IsVisible="{Binding IsLoading}"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Center">
-                <ActivityIndicator IsRunning="{Binding IsLoading}"
-                                   Color="#004225"
-                                   WidthRequest="50" HeightRequest="50"/>
-                <Label Text="Loading transactions…"
-                       TextColor="#004225" FontSize="16"
-                       HorizontalOptions="Center" Margin="0,10,0,0"/>
+            <StackLayout IsVisible="{Binding IsLoading}" HorizontalOptions="Center" VerticalOptions="Center">
+                <ActivityIndicator IsRunning="{Binding IsLoading}" Color="#0D4D2A" WidthRequest="48" HeightRequest="48"/>
+                <Label Text="Loading transactions…" TextColor="#0D4D2A" FontSize="15" HorizontalOptions="Center" Margin="0,10,0,0"/>
             </StackLayout>
 
-            <!-- Empty State — shown when NOT loading AND no data -->
-            <StackLayout IsVisible="{Binding HasNoData}"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Center">
-                <Label Text="📋" FontSize="60"
-                       HorizontalOptions="Center" TextColor="Gray"/>
-                <Label Text="No transactions found"
-                       FontSize="18" FontAttributes="Bold"
-                       TextColor="Gray" HorizontalOptions="Center"/>
+            <!-- Empty -->
+            <StackLayout IsVisible="{Binding HasNoData}" HorizontalOptions="Center" VerticalOptions="Center">
+                <yummy:PancakeView BackgroundColor="#EAF3EE" CornerRadius="44"
+                                   WidthRequest="88" HeightRequest="88" HorizontalOptions="Center">
+                    <Label Text="📋" FontSize="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                </yummy:PancakeView>
+                <Label Text="No transactions found" FontSize="17" FontAttributes="Bold" TextColor="#0D4D2A" HorizontalOptions="Center" Margin="0,14,0,0"/>
                 <Label Text="Try adjusting your search or filter, or tap Retry to reload."
-                       FontSize="14" TextColor="Gray"
-                       HorizontalOptions="Center"
-                       HorizontalTextAlignment="Center"
-                       Margin="20,10,20,20"/>
-                <Button Text="Retry"
-                        Clicked="OnRetryClicked"
-                        BackgroundColor="#004225"
-                        TextColor="White"
-                        CornerRadius="8"
-                        WidthRequest="140"/>
+                       FontSize="13.5" TextColor="#5E7A68" HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center" Margin="20,8,20,18"/>
+                <Button Text="Retry" Clicked="OnRetryClicked"
+                        BackgroundColor="#0D4D2A" TextColor="White"
+                        CornerRadius="11" WidthRequest="150" HeightRequest="46"/>
             </StackLayout>
 
-            <!-- Transaction List -->
+            <!-- List -->
             <CollectionView x:Name="historyCollectionView"
                             ItemsSource="{Binding HistoryItems}"
                             IsVisible="{Binding HasData}"
@@ -273,217 +223,108 @@
 
                 <CollectionView.Header>
                     <Label Text="TRANSACTION HISTORY"
-                           TextColor="#004225"
-                           FontSize="18" FontAttributes="Bold"
-                           Margin="5,10,5,15"/>
+                           TextColor="#0D4D2A" FontSize="16" FontAttributes="Bold"
+                           CharacterSpacing="1" Margin="4,8,4,12"/>
                 </CollectionView.Header>
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="0,5">
-                            <yummy:PancakeView HasShadow="True"
+                            <yummy:PancakeView HasShadow="True" Elevation="3"
                                                BackgroundColor="White"
-                                               CornerRadius="12"
-                                               Padding="0"
-                                               Margin="0,5">
+                                               CornerRadius="14" Padding="0"
+                                               BorderColor="#EAF1EC" BorderThickness="1"
+                                               Margin="0,4">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="5"/>
-                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="58"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <!-- Status stripe -->
                                     <BoxView BackgroundColor="{Binding StatusColor}"
                                              VerticalOptions="FillAndExpand"
                                              HorizontalOptions="FillAndExpand"/>
 
-                                    <!-- Icon -->
-                                    <StackLayout Grid.Column="1"
-                                                 HorizontalOptions="Center"
-                                                 VerticalOptions="Center"
-                                                 Padding="10">
-                                        <Image Source="yobe"
-                                               HorizontalOptions="Center"
-                                               Aspect="AspectFit"
-                                               HeightRequest="50"/>
-                                        <Label Text="YSJ"
-                                               TextColor="#004225"
-                                               FontSize="10" FontAttributes="Bold"
-                                               HorizontalOptions="Center"
-                                               Margin="0,-5,0,0"/>
+                                    <StackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Padding="8">
+                                        <yummy:PancakeView CornerRadius="12"
+                                                           WidthRequest="42" HeightRequest="42"
+                                                           BackgroundGradientStartColor="#1A7A45"
+                                                           BackgroundGradientEndColor="#0D4D2A"
+                                                           BackgroundGradientAngle="135"
+                                                           Padding="0" HorizontalOptions="Center">
+                                            <Image Source="Logo" HorizontalOptions="Center"
+                                                   VerticalOptions="Center" Aspect="AspectFit"
+                                                   HeightRequest="26" WidthRequest="26" Margin="7"/>
+                                        </yummy:PancakeView>
+                                        <Label Text="KSJ" TextColor="#0D4D2A" FontSize="9"
+                                               FontAttributes="Bold" HorizontalOptions="Center" Margin="0,3,0,0"/>
                                     </StackLayout>
 
-                                    <!-- Expandable content -->
-                                    <extensions:Expander Grid.Column="2"
-                                                         Padding="15"
-                                                         IsExpanded="False">
+                                    <extensions:Expander Grid.Column="2" Padding="15" IsExpanded="False">
                                         <extensions:Expander.Header>
                                             <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto">
-
-                                                <!-- Name — uses DisplayName (payer_name ?? fullName) -->
                                                 <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
-                                                    <Label Text="Name:"
-                                                           FontSize="12" FontAttributes="Bold"
-                                                           TextColor="#004225"/>
-                                                    <Label Grid.Column="1"
-                                                           Text="{Binding DisplayName}"
-                                                           TextColor="Black"
-                                                           FontSize="12" FontAttributes="Bold"
-                                                           Margin="10,0,0,0"/>
+                                                    <Label Text="Name:" FontSize="12" FontAttributes="Bold" TextColor="#0D4D2A"/>
+                                                    <Label Grid.Column="1" Text="{Binding DisplayName}" TextColor="#14241B" FontSize="12" FontAttributes="Bold" Margin="10,0,0,0"/>
                                                 </Grid>
-
-                                                <!-- Payment Item — uses EffectivePaymentItem -->
                                                 <Grid Grid.Row="1" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
-                                                    <Label Text="Item:"
-                                                           FontSize="12" FontAttributes="Bold"
-                                                           TextColor="#004225"/>
-                                                    <Label Grid.Column="1"
-                                                           Text="{Binding ServiceNameTruncated}"
-                                                           TextColor="Black"
-                                                           FontSize="12"
-                                                           Margin="10,0,0,0"/>
+                                                    <Label Text="Item:" FontSize="12" FontAttributes="Bold" TextColor="#0D4D2A"/>
+                                                    <Label Grid.Column="1" Text="{Binding ServiceNameTruncated}" TextColor="#14241B" FontSize="12" Margin="10,0,0,0"/>
                                                 </Grid>
-
-                                                <!-- Status -->
                                                 <Grid Grid.Row="2" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
-                                                    <Label Text="Status:"
-                                                           FontSize="12" FontAttributes="Bold"
-                                                           TextColor="#004225"/>
-                                                    <Label Grid.Column="1"
-                                                           Text="{Binding status}"
-                                                           TextColor="{Binding StatusColor}"
-                                                           FontSize="12" FontAttributes="Bold"
-                                                           Margin="10,0,0,0"/>
+                                                    <Label Text="Status:" FontSize="12" FontAttributes="Bold" TextColor="#0D4D2A"/>
+                                                    <Label Grid.Column="1" Text="{Binding status}" TextColor="{Binding StatusColor}" FontSize="12" FontAttributes="Bold" Margin="10,0,0,0"/>
                                                 </Grid>
-
-                                                <!-- Amount -->
                                                 <Grid Grid.Row="3" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
-                                                    <Label Text="Amount:"
-                                                           FontSize="12" FontAttributes="Bold"
-                                                           TextColor="#004225"/>
-                                                    <Label Grid.Column="1"
-                                                           Text="{Binding FormattedAmount}"
-                                                           TextColor="Red"
-                                                           FontSize="14" FontAttributes="Bold"
-                                                           Margin="10,0,0,0"/>
+                                                    <Label Text="Amount:" FontSize="12" FontAttributes="Bold" TextColor="#0D4D2A"/>
+                                                    <Label Grid.Column="1" Text="{Binding FormattedAmount}" TextColor="#E05252" FontSize="14" FontAttributes="Bold" Margin="10,0,0,0"/>
                                                 </Grid>
-
-                                                <!-- Date -->
                                                 <Grid Grid.Row="4" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
-                                                    <Label Text="Date:"
-                                                           FontSize="12" FontAttributes="Bold"
-                                                           TextColor="#004225"/>
-                                                    <Label Grid.Column="1"
-                                                           Text="{Binding FormattedDate}"
-                                                           TextColor="Blue"
-                                                           FontSize="12"
-                                                           Margin="10,0,0,0"/>
+                                                    <Label Text="Date:" FontSize="12" FontAttributes="Bold" TextColor="#0D4D2A"/>
+                                                    <Label Grid.Column="1" Text="{Binding FormattedDate}" TextColor="#1A7A45" FontSize="12" Margin="10,0,0,0"/>
                                                 </Grid>
                                             </Grid>
                                         </extensions:Expander.Header>
 
-                                        <!-- Expanded details -->
                                         <extensions:Expander.Content>
-                                            <yummy:PancakeView BackgroundColor="#F8F9FA"
-                                                               CornerRadius="8"
-                                                               Padding="15"
-                                                               Margin="0,10,0,0">
+                                            <yummy:PancakeView BackgroundColor="#F6FAF7" CornerRadius="10"
+                                                               Padding="15" Margin="0,10,0,0"
+                                                               BorderColor="#EAF1EC" BorderThickness="1">
                                                 <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                                                    <Label Grid.Row="0" Text="Additional Details" FontSize="14" FontAttributes="Bold" TextColor="#0D4D2A" Margin="0,0,0,10"/>
 
-                                                    <Label Grid.Row="0"
-                                                           Text="Additional Details"
-                                                           FontSize="14" FontAttributes="Bold"
-                                                           TextColor="#004225"
-                                                           Margin="0,0,0,10"/>
-
-                                                    <!-- Email — uses DisplayEmail -->
                                                     <Grid Grid.Row="1" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
-                                                        <Label Text="Email:"
-                                                               FontSize="12" FontAttributes="Bold"
-                                                               TextColor="#004225"/>
-                                                        <Label Grid.Column="1"
-                                                               Text="{Binding DisplayEmail}"
-                                                               TextColor="Black"
-                                                               FontSize="12"
-                                                               Margin="10,0,0,0"/>
+                                                        <Label Text="Email:" FontSize="12" FontAttributes="Bold" TextColor="#0D4D2A"/>
+                                                        <Label Grid.Column="1" Text="{Binding DisplayEmail}" TextColor="#14241B" FontSize="12" Margin="10,0,0,0"/>
                                                     </Grid>
-
-                                                    <!-- Phone -->
                                                     <Grid Grid.Row="2" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
-                                                        <Label Text="Phone:"
-                                                               FontSize="12" FontAttributes="Bold"
-                                                               TextColor="#004225"/>
-                                                        <Label Grid.Column="1"
-                                                               Text="{Binding phoneNumber}"
-                                                               TextColor="Black"
-                                                               FontSize="12"
-                                                               Margin="10,0,0,0"/>
+                                                        <Label Text="Phone:" FontSize="12" FontAttributes="Bold" TextColor="#0D4D2A"/>
+                                                        <Label Grid.Column="1" Text="{Binding phoneNumber}" TextColor="#14241B" FontSize="12" Margin="10,0,0,0"/>
                                                     </Grid>
-
-                                                    <!-- Reference (tap to copy) -->
                                                     <Grid Grid.Row="3" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
-                                                        <Label Text="Reference:"
-                                                               FontSize="12" FontAttributes="Bold"
-                                                               TextColor="#004225"/>
-                                                        <Label Grid.Column="1"
-                                                               Text="{Binding paymentReference}"
-                                                               TextColor="Blue"
-                                                               FontSize="12" FontAttributes="Bold"
-                                                               TextDecorations="Underline"
-                                                               Margin="10,0,0,0">
+                                                        <Label Text="Reference:" FontSize="12" FontAttributes="Bold" TextColor="#0D4D2A"/>
+                                                        <Label Grid.Column="1" Text="{Binding paymentReference}" TextColor="#1A7A45" FontSize="12" FontAttributes="Bold" TextDecorations="Underline" Margin="10,0,0,0">
                                                             <Label.GestureRecognizers>
                                                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
                                                             </Label.GestureRecognizers>
                                                         </Label>
                                                     </Grid>
-
-                                                    <!-- Tax ID (null-safe — shows "—" when null) -->
                                                     <Grid Grid.Row="4" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
-                                                        <Label Text="Tax ID:"
-                                                               FontSize="12" FontAttributes="Bold"
-                                                               TextColor="#004225"/>
-                                                        <Label Grid.Column="1"
-                                                               Text="{Binding taxId, FallbackValue='—', TargetNullValue='—'}"
-                                                               TextColor="Red"
-                                                               FontSize="12" FontAttributes="Bold"
-                                                               Margin="10,0,0,0"/>
+                                                        <Label Text="Tax ID:" FontSize="12" FontAttributes="Bold" TextColor="#0D4D2A"/>
+                                                        <Label Grid.Column="1" Text="{Binding taxId, FallbackValue='—', TargetNullValue='—'}" TextColor="#E05252" FontSize="12" FontAttributes="Bold" Margin="10,0,0,0"/>
                                                     </Grid>
-
-                                                    <!-- MDA -->
                                                     <Grid Grid.Row="5" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
-                                                        <Label Text="MDA:"
-                                                               FontSize="12" FontAttributes="Bold"
-                                                               TextColor="#004225"/>
-                                                        <Label Grid.Column="1"
-                                                               Text="{Binding mda, FallbackValue='—', TargetNullValue='—'}"
-                                                               TextColor="Black"
-                                                               FontSize="12"
-                                                               Margin="10,0,0,0"/>
+                                                        <Label Text="MDA:" FontSize="12" FontAttributes="Bold" TextColor="#0D4D2A"/>
+                                                        <Label Grid.Column="1" Text="{Binding mda, FallbackValue='—', TargetNullValue='—'}" TextColor="#14241B" FontSize="12" Margin="10,0,0,0"/>
                                                     </Grid>
-
-                                                    <!-- Court -->
                                                     <Grid Grid.Row="6" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
-                                                        <Label Text="Court:"
-                                                               FontSize="12" FontAttributes="Bold"
-                                                               TextColor="#004225"/>
-                                                        <Label Grid.Column="1"
-                                                               Text="{Binding court, FallbackValue='—', TargetNullValue='—'}"
-                                                               TextColor="Black"
-                                                               FontSize="12"
-                                                               Margin="10,0,0,0"/>
+                                                        <Label Text="Court:" FontSize="12" FontAttributes="Bold" TextColor="#0D4D2A"/>
+                                                        <Label Grid.Column="1" Text="{Binding court, FallbackValue='—', TargetNullValue='—'}" TextColor="#14241B" FontSize="12" Margin="10,0,0,0"/>
                                                     </Grid>
-
-                                                    <!-- Payment Date -->
                                                     <Grid Grid.Row="7" ColumnDefinitions="Auto,*" Margin="0,5,0,0">
-                                                        <Label Text="Payment Date:"
-                                                               FontSize="12" FontAttributes="Bold"
-                                                               TextColor="#004225"/>
-                                                        <Label Grid.Column="1"
-                                                               Text="{Binding date_of_payment, FallbackValue='—', TargetNullValue='—'}"
-                                                               TextColor="Purple"
-                                                               FontSize="12" FontAttributes="Bold"
-                                                               Margin="10,0,0,0"/>
+                                                        <Label Text="Payment Date:" FontSize="12" FontAttributes="Bold" TextColor="#0D4D2A"/>
+                                                        <Label Grid.Column="1" Text="{Binding date_of_payment, FallbackValue='—', TargetNullValue='—'}" TextColor="#7A4FA0" FontSize="12" FontAttributes="Bold" Margin="10,0,0,0"/>
                                                     </Grid>
                                                 </Grid>
                                             </yummy:PancakeView>
@@ -497,27 +338,20 @@
 
                 <CollectionView.Footer>
                     <StackLayout Padding="10" IsVisible="{Binding HasData}">
-                        <BoxView HeightRequest="1" BackgroundColor="LightGray" Margin="0,10"/>
+                        <BoxView HeightRequest="1" BackgroundColor="#EAF1EC" Margin="0,10"/>
                         <Label Text="{Binding Statistics.TotalTransactions, StringFormat='Total: {0} transactions'}"
-                               TextColor="#004225"
-                               FontSize="14" FontAttributes="Bold"
-                               HorizontalOptions="Center"/>
-                        <StackLayout Orientation="Horizontal"
-                                     HorizontalOptions="Center"
-                                     Margin="0,5,0,0">
-                            <Label Text="Successful: " TextColor="Green" FontSize="12" FontAttributes="Bold"/>
-                            <Label Text="{Binding Statistics.FormattedSuccessfulAmount}" TextColor="Green" FontSize="12" FontAttributes="Bold"/>
-                            <Label Text=" | Pending: " TextColor="Orange" FontSize="12" FontAttributes="Bold" Margin="10,0,0,0"/>
-                            <Label Text="{Binding Statistics.FormattedPendingAmount}" TextColor="Orange" FontSize="12" FontAttributes="Bold"/>
+                               TextColor="#0D4D2A" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,5,0,0">
+                            <Label Text="Successful: " TextColor="#1A7A45" FontSize="12" FontAttributes="Bold"/>
+                            <Label Text="{Binding Statistics.FormattedSuccessfulAmount}" TextColor="#1A7A45" FontSize="12" FontAttributes="Bold"/>
+                            <Label Text=" | Pending: " TextColor="#C8A84B" FontSize="12" FontAttributes="Bold" Margin="10,0,0,0"/>
+                            <Label Text="{Binding Statistics.FormattedPendingAmount}" TextColor="#C8A84B" FontSize="12" FontAttributes="Bold"/>
                         </StackLayout>
                         <Label Text="{Binding Statistics.FormattedTotalAmount, StringFormat='Grand Total: {0}'}"
-                               TextColor="Red"
-                               FontSize="16" FontAttributes="Bold"
-                               HorizontalOptions="Center"
-                               Margin="0,5,0,20"/>
+                               TextColor="#E05252" FontSize="16" FontAttributes="Bold"
+                               HorizontalOptions="Center" Margin="0,5,0,20"/>
                     </StackLayout>
                 </CollectionView.Footer>
-
             </CollectionView>
         </Grid>
     </Grid>

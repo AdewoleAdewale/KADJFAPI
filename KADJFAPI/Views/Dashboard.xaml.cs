@@ -363,11 +363,12 @@ namespace KADJFAPI.Views
             {
                 await Task.Delay(1000);
 
-                string url = "https://yobejud.osoftpay.net/Api/KadunaJFAPI/InvoiceHistory?Email=" +
-                             LoginPage.myemail;
+                // was: "https://kadjud.osoftpay.net/Api/KadunaJFAPI/InvoiceHistory?Email=" + LoginPage.myemail;
+                string url = ApiConfig.InvoiceHistory(LoginPage.mymda);
 
                 try
                 {
+                    await Task.Delay(1000);
                     var handler = new HttpClientHandler
                     {
                         ServerCertificateCustomValidationCallback =
@@ -678,7 +679,7 @@ namespace KADJFAPI.Views
             try
             {
                 var msg = Uri.EscapeDataString(
-                    $"Hello, I need support with YobeJudiciary app. User: {LoginPage.MyfullName}");
+                    $"Hello, I need support with KadunaJudiciary app. User: {LoginPage.MyfullName}");
                 await Launcher.OpenAsync($"https://wa.me/2348030523208?text={msg}");
             }
             catch { await DisplayAlert("Error", "Unable to open WhatsApp. Contact +234-803-052-3208.", "OK"); }
@@ -690,23 +691,23 @@ namespace KADJFAPI.Views
             {
                 await Email.ComposeAsync(new EmailMessage
                 {
-                    Subject = "YobeJudiciary App Support Request",
+                    Subject = "KadunaJudiciary App Support Request",
                     Body = $"Hello Support,\n\nUser: {LoginPage.MyfullName}\n" +
                               $"MDA: {LoginPage.mymda}\n" +
                               $"Date: {DateTime.Now:dd MMM yyyy HH:mm}\n\n" +
                               "[Describe your issue here]",
-                    To = new List<string> { "support@yobejudiciary.ng" }
+                    To = new List<string> { "support@kadunajudiciary.ng" }
                 });
             }
-            catch { await DisplayAlert("Error", "Cannot open email. Write to support@yobejudiciary.ng.", "OK"); }
+            catch { await DisplayAlert("Error", "Cannot open email. Write to support@kadunajudiciary.ng.", "OK"); }
         }
 
         private async Task ShowAboutInfo()
         {
-            await DisplayAlert("About YobeJudiciary",
-                $"YobeJudiciary Mobile App\nVersion: 3.0.0\n" +
+            await DisplayAlert("About KadunaJudiciary",
+                $"KadunaJudiciary Mobile App\nVersion: 3.0.0\n" +
                 $"Powered by OSOFTPAY\n\n" +
-                $"Support:\n📞 +234-803-052-3208\n📧 support@yobejudiciary.ng",
+                $"Support:\n📞 +234-803-052-3208\n📧 support@kadunajudiciary.ng",
                 "OK");
         }
 
